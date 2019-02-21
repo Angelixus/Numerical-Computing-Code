@@ -48,4 +48,41 @@ for tuple in res:
 
 
 """IMPLEMENT INCREMENT RECURSIVELY"""
-#%% Bisection Method
+#%% Bisection Method, only one point
+def bisection(f, a, b, maxiter = 100, tol = 1e-12):
+    i = 0
+    x0 = a
+    x1 = b
+    while(i  < maxiter and abs(abs(x1 - x0) / 2) > tol):
+        m = (x0 + x1) / 2
+        if f(a) * f(m) < 0:
+            x1 = m
+        elif f(m) * f(b) < 0:
+            x0 = m
+        else:
+            return m, i + 1
+        i+=1
+    return m, i + 1
+
+
+
+f1 = lambda x : x**3 - 10*x**2 + 5
+a1 = -15.; b1 = 15.; dx = 0.1
+
+print('Founded root: %.5f' % bisection(f1, a1, b1)[0])
+
+#%% Bisection method, n points
+def bisectionN(f, a, b, tol = 1e-12, maxiter = 100):
+
+    intervals = incrementalSearchAllInOne(f, a, b, 0.1)
+
+    points = []
+    for tuple in intervals:
+        points.append(bisection(f, tuple[0], tuple[1], tol = tol, maxiter = maxiter))
+    return points
+
+res = bisectionN(f, a, b)
+for tuple in res:
+    print('Aproximation: %.16f Iterations: %d' %(tuple[0], tuple[1]))
+
+#%% Newton-Raphson's Method
