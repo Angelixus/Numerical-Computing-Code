@@ -7,7 +7,7 @@ Created on Thu Feb 21 18:05:49 2019
 
 import numpy as np
 import matplotlib.pyplot as plt
-#%% 
+#%% Original Code
 originalf = lambda x : np.log(x) + x
 x = np.linspace(0.1, 2)
 plt.plot(x, originalf(x), 'b')
@@ -22,6 +22,7 @@ for i in range(50):
         a = m
 print('Zero of the equation = ', m)
 plt.plot(m, 0, 'ro') # Zero of the equation
+
 #%% Check that our aproximation m gives as an image the intersection between y = x and e**-x = x
 # Advantages: It is an easy algorithm that it is versatile enough to analize many things on maths!!!!
 g = lambda x : np.exp(-x)
