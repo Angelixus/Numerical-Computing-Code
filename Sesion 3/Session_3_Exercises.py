@@ -110,4 +110,4 @@ f = lambda x : x**3 - 10*x**2 + 5
 a = -15.; b = 15.; dx = 0.1
 
 for x in incrementalSearchAllInOneFunctional(f, a, b, dx): 
-    print(x) # Esto es maravilloso
+    print(x)
