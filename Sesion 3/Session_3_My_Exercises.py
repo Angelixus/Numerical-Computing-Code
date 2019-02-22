@@ -100,6 +100,14 @@ def computeRootsForAnyPolynomial():
         print('Aproximation number %d is: %.16f' %(i, tuple[0]))
         i+=1
 
+def incrementalRecursive(lfunction, leftbound, rightbound, increment, maxiter = 100):
+    x0 = leftbound
+    x1 = leftbound +increment
+    if(lfunction(x0) * lfunction(x1) < 0):
+        return(x0, x1)
+    x0+=increment
+    x1+=increment
+    return incrementalRecursive(lfunction, x0, x1, increment, maxiter)
 
 def main(callOthers = False):
     computeRootsForAnyPolynomial()
@@ -113,7 +121,9 @@ def main(callOthers = False):
         while x0 != None:
             print("There is a zero in [%.1f, %.1f]" %(x0, x1))
             x0, x1 = incrementalSearch(f, x1, b, dx)
-        
+
+        x0, x1 = incrementalRecursive(f, a, b, dx)
+        print('OUTPUT: ', x0, x1)
         #Second Call
         res = incrementalSearchAllInOne(f, a, b, dx)
         for tuple in res:
