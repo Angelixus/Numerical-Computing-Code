@@ -43,10 +43,6 @@ def incrementalSearchAllInOne(lfunction, leftbound, rightbound, increment):
         x1 += increment
     return res
 
-res = incrementalSearchAllInOne(f, a, b, dx)
-for tuple in res:
-    print("There is a zero in [%.1f, %.1f]" %(tuple[0], tuple[1]))
-
 
 """IMPLEMENT INCREMENT RECURSIVELY"""
 #%% Bisection Method, only one point
