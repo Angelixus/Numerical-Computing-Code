@@ -1,6 +1,7 @@
 
 import numpy as np
 import matplotlib.pyplot as ptl
+import re
 #%% Incremental Search Algorithm
 """
 lfunction is a lambda function representing the mathematical function
@@ -86,28 +87,3 @@ for tuple in res:
     print('Aproximation: %.16f Iterations: %d' %(tuple[0], tuple[1]))
 
 #%% Newton-Raphson's Method
-
-
-#%% IncremetalAll functional
-def incrementalSearchAllInOneFunctional(lfunction, leftbound, rightbound, increment, maxiter = 100):
-    x0 = leftbound
-    x1 = leftbound + increment
-    i = 0
-    foundedSol = False
-    while(x1 < rightbound):
-        solution = (None, None)
-        if(lfunction(x0) * lfunction(x1) < 0):
-            solution = (x0, x1)
-            foundedSol = True
-            yield solution
-        x0 += increment
-        x1 += increment
-        i+=1
-    if(not(foundedSol)):
-        yield None, None
-
-f = lambda x : x**3 - 10*x**2 + 5
-a = -15.; b = 15.; dx = 0.1
-
-for x in incrementalSearchAllInOneFunctional(f, a, b, dx): 
-    print(x) 
