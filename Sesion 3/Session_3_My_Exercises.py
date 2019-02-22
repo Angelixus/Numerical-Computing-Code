@@ -71,17 +71,17 @@ def incrementalSearchAllInOneFunctional(lfunction, leftbound, rightbound, increm
     x0 = leftbound
     x1 = leftbound + increment
     i = 0
-    foundedSol = False
+    foundSol = False
     while(x1 < rightbound):
         solution = (None, None)
         if(lfunction(x0) * lfunction(x1) < 0):
             solution = (x0, x1)
-            foundedSol = True
+            foundSol = True
             yield solution
         x0 += increment
         x1 += increment
         i+=1
-    if(not(foundedSol)):
+    if(not(foundSol)):
         yield None, None
 
 #%% Find roots of any polynomial at any interval (polynomial continuous on that interval)
