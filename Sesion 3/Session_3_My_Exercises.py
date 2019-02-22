@@ -86,7 +86,7 @@ def incrementalSearchAllInOneFunctional(lfunction, leftbound, rightbound, increm
 
 #%% Find roots of any polynomial at any interval (polynomial continuous on that interval)
 def computeRootsForAnyPolynomial():
-    function = input("Enter the polynomial: ")
+    function = input("Enter the polynomial (format example: a0*x**n + a1*x**n-1...an*x*1 + b): ")
 
     func = lambda x : eval(function)
 
