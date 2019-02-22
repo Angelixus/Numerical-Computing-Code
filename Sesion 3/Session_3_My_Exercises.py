@@ -90,8 +90,8 @@ def computeRootsForAnyPolynomial():
 
     func = lambda x : eval(function)
 
-    rangeF = re.split(",", input("Enter the range ").replace('[', '').replace(']', '').replace(' ', ''))
-    increment = float(input('Enter the increment: '))
+    rangeF = re.split(",", input("Enter the range (format: [a, b]): ").replace('[', '').replace(']', '').replace(' ', ''))
+    increment = float(input('Enter the increment (format for decimal example: \'0.1\'): '))
 
     rootsIterations = bisectionN(func, int(rangeF[0]), int(rangeF[1]), dx = increment)
 
@@ -137,4 +137,6 @@ def main(callOthers = False):
         for x in incrementalSearchAllInOneFunctional(f, a, b, dx): 
             print(x) 
 
-main()
+message = "Do you want to execute the whole code or only the root computing function (Type 'True' or 'False'): "
+option = True if input(message) == 'True' else False
+main(option)
