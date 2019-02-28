@@ -109,9 +109,27 @@ yPoints = []
 yPoints += [f(i) for i in xPoints] # Generate the image for all the xPoints and store them on yPoints
 plt.plot(xPoints, np.zeros_like(xPoints), 'g')
 
-plt.plot(np.zeros_like(yPoints),yPoints, 'g')
+plt.plot(np.zeros_like(yPoints), yPoints, 'g')
 plt.plot(xPoints, yPoints, 'k' ,label = 'Function')
 plt.plot(tuple1[0], 0, "ro")
 plt.plot(tuple2[0], 0, "ro")
 plt.plot(tuple3[0], 0, "ro")
 plt.show()
+
+#%% Proposed Exercise 1 (Use bisectionN defined above)
+f = lambda x : (x**4) + (2*(x**3)) - (7*(x**2)) + (3)
+pointsF = bisectionN(f, -15, 15)
+
+xPoints = np.linspace(-4.5 ,2.5)
+yPoints = []
+yPoints += [f(i) for i in xPoints]
+
+plt.plot(xPoints, np.zeros_like(xPoints), 'k')
+plt.plot(np.zeros_like(yPoints), yPoints, 'g')
+
+plt.plot(xPoints, yPoints, 'b' ,label = 'Function')
+
+for point in pointsF:
+    plt.plot(point[0], 0, 'ro')
+plt.show()
+#%% Proposed Exercise 2
