@@ -49,7 +49,7 @@ plt.show()
 #%% Taylor Polynomial
 # Define a function to calculate the polynomial
 def taylor(x, degree):
-    f = lambda x: np.exp(x)
+   #f = lambda x: np.exp(x)
     x = np.linspace(-3, 3)
     pol = 0.
     factorial = 1.
@@ -71,7 +71,7 @@ plt.show()
 #%% Taylor Polynomial
 # Define a function to calculate the polynomial
 def taylor2(x, degree):
-    f = lambda x: np.exp(x)
+   #f = lambda x: np.exp(x)
     x = np.linspace(-3, 3)
     pol = 0.
     factorial = 1.
