@@ -83,3 +83,17 @@ for tuple in res:
     print('Aproximation: %.16f Iterations: %d' %(tuple[0], tuple[1]))
 
 #%% Newton-Raphson's Method
+def newton(f, df, x0, tol=1e-12, maxiter=100):
+    newGuess = x0 - (f(x0) / df(x0))
+    i = 1
+    while(i < maxiter and abs(newGuess - x0) > tol):
+        x0 = newGuess
+        newGuess = x0  - (f(x0) / df(x0))
+        i+=1
+    return (newGuess, i)
+
+f = lambda x : x**3 - 10*x**2 + 5
+df = lambda x : 3*x**2 - 20*x
+
+tuple = newton(f, df, -1)
+print("%.16f %d" %(tuple[0], tuple[1]))
