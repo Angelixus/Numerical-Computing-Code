@@ -1,6 +1,6 @@
 
 import numpy as np
-import matplotlib.pyplot as ptl
+import matplotlib.pyplot as plt
 import re
 #%% Incremental Search Algorithm
 """
@@ -85,15 +85,33 @@ for tuple in res:
 #%% Newton-Raphson's Method
 def newton(f, df, x0, tol=1e-12, maxiter=100):
     newGuess = x0 - (f(x0) / df(x0))
-    i = 1
-    while(i < maxiter and abs(newGuess - x0) > tol):
+    condition = x0 - newGuess
+    i = 0
+    while(i < maxiter and abs(condition) > tol):
         x0 = newGuess
         newGuess = x0  - (f(x0) / df(x0))
         i+=1
+        condition = x0 - newGuess
     return (newGuess, i)
 
 f = lambda x : x**3 - 10*x**2 + 5
 df = lambda x : 3*x**2 - 20*x
 
-tuple = newton(f, df, -1)
-print("%.16f %d" %(tuple[0], tuple[1]))
+tuple1 = newton(f, df, -1)
+tuple2 = newton(f, df, 1)
+tuple3 = newton(f, df, 10)
+print("%.16f %d" %(tuple1[0], tuple1[1]))
+print("%.16f %d" %(tuple2[0], tuple2[1]))
+print("%.16f %d" %(tuple3[0], tuple3[1]))
+
+xPoints = np.linspace(-1 ,10.5)
+yPoints = []
+yPoints += [f(i) for i in xPoints] # Generate the image for all the xPoints and store them on yPoints
+plt.plot(xPoints, np.zeros_like(xPoints), 'g')
+
+plt.plot(np.zeros_like(yPoints),yPoints, 'g')
+plt.plot(xPoints, yPoints, 'k' ,label = 'Function')
+plt.plot(tuple1[0], 0, 'r')
+plt.plot(tuple2[0], 0, 'r')
+plt.plot(tuple3[0], 0, 'r')
+plt.show()
