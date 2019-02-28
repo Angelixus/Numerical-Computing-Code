@@ -70,7 +70,7 @@ plt.legend()
 plt.show()
 #%% Taylor Polynomial
 # Define a function to calculate the polynomial
-def taylor(x, degree):
+def taylor2(x, degree):
     f = lambda x: np.exp(x)
     x = np.linspace(-3, 3)
     pol = 0.
@@ -87,7 +87,7 @@ f = lambda x: np.exp(x)
 x = np.linspace(-3, 3)
 plt.plot(x, f(x), label = 'Exponential function')
 for degree in range(5):
-    plt.plot(x, taylor(x, degree), label = 'Taylor´s polynomial using custom function ' + str(degree))
+    plt.plot(x, taylor2(x, degree), label = 'Taylor´s polynomial using custom function ' + str(degree))
    # plt.pause(2)
 plt.legend()
 plt.show()
