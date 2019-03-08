@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.optimize as op
+import sympy as sym
 
 def incrementalSearchAllInOne(lfunction, leftbound, rightbound, increment):
     x0 = leftbound
@@ -49,4 +51,47 @@ plt.plot([0, 0], [-200, 200], 'k') # Asociates the i positions of both arrays (p
 
 plt.plot(xPoints, yPoints, 'b')
 plt.plot(r, r*0, 'ro')
+plt.show()
+
+#%% Maxima/Minima
+def inflectionPoints(f, xtol=1e-12, xmaxiter=100):
+    brackets = incrementalSearchAllInOne(f, -2, 2, 0.1)
+    points=np.zeros_like(brackets)
+    for i in range(len(brackets)):
+        points[i] = secant(f, brackets[i][0], brackets[i][1], tol=xtol, maxiter=xmaxiter)
+
+    res=np.zeros_like(points)
+    for i in range(len(points)):
+        res[i] = op.newton(f, points[i][0], tol=xtol, maxiter=xmaxiter)
+    return res
+    
+
+x = sym.Symbol('x', real = True)
+
+xPoints = np.linspace(-2, 2)
+
+f_sim = (x**3) + sym.cos(4*x)*sym.log(x + 7) - 1
+df_sim = sym.diff(f_sim, x)
+d2_sim = sym.diff(df_sim, x)
+
+f = sym.lambdify([x], f_sim, 'numpy')
+df = sym.lambdify([x], df_sim, 'numpy')
+d2f = sym.lambdify([x], d2_sim, 'numpy')
+
+zeros = inflectionPoints(df)
+print(zeros)
+
+plt.plot([-2, 2], [0,0])
+plt.plot(xPoints, f(xPoints), label='Function')
+plt.legend()
+plt.show()
+plt.plot()
+plt.plot([-2, 2], [0,0])
+plt.plot(zeros, zeros, 'ro', label='points')
+plt.plot(xPoints, df(xPoints), label='FunctionDer')
+plt.legend()
+plt.show()
+plt.plot([-2, 2], [0,0])
+plt.plot(xPoints, d2f(xPoints), label='Function2Der')
+plt.legend()
 plt.show()
