@@ -30,6 +30,7 @@ def Vandermonde(x):
         vanMatrix[:, j] = x[:]**j
     
     return vanMatrix
+    
 def polVandermonde(x, y):
     vanMatrix = Vandermonde(x)
     return np.linalg.solve(vanMatrix, y)[::-1]
