@@ -92,6 +92,34 @@ def executeEx2(h):
     plt.legend()
     plt.show()
 
+def executeEx3():
+    f = lambda x: np.sin(2*np.pi*x)
+    x = sym.Symbol('x', real=True)
+    f_sim = sym.sin(2*sym.pi*x)
+    df_sim=sym.diff(f_sim, x)
+    d2f_sim = sym.diff(df_sim, x)
+
+    lambdaFuncDer = sym.lambdify([x],d2f_sim, 'numpy')
+    lambdaFunc = sym.lambdify([x],f_sim, 'numpy')
+    a = 0
+    b = 1
+    h=0.01
+
+    result = derivative2(lambdaFunc, a, b, h)
+    error_center = abs(result[1]-lambdaFuncDer(result[0])) # Our aproximation - the exact value
+    EaCenter = norm(error_center)
+    ErCenter = EaCenter / norm(lambdaFuncDer(result[0]))
+
+    print('GLOBAL ERRORS')
+    print('h: ' + str(h) + '\n')
+    print('E(df_f): %.6e\n' %ErCenter)
+
+    plt.title(r'Second derivative of sin(2πx) with h = ' + str(h))
+    plt.plot(result[0], lambdaFuncDer(result[0]), 'r', linewidth=4, label='Exact Derivative')
+    plt.plot(result[0], result[1], 'b--', label='Centered Derivative')
+    plt.legend()
+    plt.show()
+
 def derivativesO1(f, a, b, h):
     df_f = (f(a + h) - f(a)) / h
     df_b = (f(b) - f(b - h)) / h
@@ -124,19 +152,16 @@ def derivatives_b(f, a, b, h):
     df_centered[-1] = derivativesO2(f, a, b, h)[1]# Regressive order 2
     return x, df_centered
 
+def derivative2(f,a,b,h):
+    x = np.arange(a+h, b, h)
+    df_centered = (f(x + h) - 2*f(x) + f(x - h)) / (h**2)
+    return x, df_centered
+
 #%% Exercise 1
 executeEx1(0.1)
 executeEx1(0.01)
 
 #%% Exercise 2
 executeEx2(0.01)
-"""
-Second derivative
-"""
-f = lambda x: np.sin(2*np.pi*x)
-x = sym.Symbol('x', real=True)
-f_sim = sym.sin(2*sym.pi*x)
-df_sim=sym.diff(f_sim, x)
-d2f_sim = sym.diff(df_sim, x)
-
-lambdaFunc = sym.lambdify([x],d2f_sim, 'numpy')
+#%% Exercise 3
+executeEx3()
